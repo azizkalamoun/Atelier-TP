@@ -1,0 +1,12 @@
+{% extends './base.html' %}
+
+{% block content %}
+    <div class="col-md-12 text-center">
+        <h4 class="text-center">Ajout Fournisseur  </h4>
+    </div>
+    <form method='POST' class="post-form">
+         {% csrf_token %}
+        {{ form.as_p }}
+        <center><button type="submit" class="mb-4 btn btn-outline-dark btn-right">Enregistrer</button></center>
+    </form>
+{% endblock %}

@@ -1,0 +1,59 @@
+{% extends 'magasin/base.html' %}
+
+{% block title %} Catalogue de produits {% endblock title %}
+
+{% block content %}
+    <!-- body -->
+    <!-- Dropdown list of categories -->
+    <div class="row justify-content-center mb-3 mt-5">
+        <div class="col-sm-4 text-center">
+            <center><a href="{% url 'addproduct' %}" class="mb-4 btn btn-outline-dark btn-right">Add Product</a></center>
+            <form method="get">
+                <label for="category" class="mb-3">Filtrer par catégorie :</label>
+                <select name="category" id="category" class="form-select" onchange="this.form.submit()">
+                    <option value="">Toutes les catégories</option>
+                    {% for category in categories %}
+                        <option value="{{ category.name }}" {% if category.name == selected_category %}selected{% endif %}>{{ category.name }}</option>
+                    {% endfor %}
+                </select>
+            </form>
+        </div>
+        </div>
+    </div>
+
+    <!-- Products -->
+    <div class="container mt-5">
+        <div class="row">
+            
+                
+                    {% if search_query %}
+                        <h2>Search Results for "{{ search_query }}"</h2>
+                        {% if products %}
+                                {% for product in products %}
+                                <div id={{ product.id }} class="col-sm" style="width: 18rem;">
+                                    <img src="/media/{{ product.img }}" style="max-width: 250px; height: auto;" class="rounded mx-auto d-block">
+                                    <div>
+                                        <p>{{ product.libellé }}</p>
+                                        <p><b>{{ product.description }}</b></p>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                        {% else %}
+                            <p>No results found.</p>
+                        {% endif %}
+                    {% else %}
+                        {% for product in products %}
+                            <div id={{ product.id }} class="col-sm" style="width: 18rem;">
+                                <img src="/media/{{ product.img }}" style="max-width: 250px; height: auto;">
+                                <div>
+                                    <p>{{ product.libellé }}</p>
+                                    <p><b>{{ product.description }}</b></p>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                
+            
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends 'magasin/base.html' %}
+{% block title %} Liste de Fournisseurs {% endblock title %}
+{% block content %}
+<!-- body -->
+<!-- all fournisseurs -->
+<center><a href="{% url 'addfournisseur' %}" class="mb-4 btn btn-outline-dark btn-right">Add Fournisseur</a></center>
+<div class="container mt-3 ">
+    <div class="row">
+{% for fournisseur  in fournisseurs %}
+<div class="col-sm">
+<p ><b>{{fournisseur.name}}</b></p>
+<p >{{fournisseur.adresse}}</p>
+<p >{{fournisseur.email}}</p>
+<p >{{fournisseur.telephone}}</p>
+</div>
+{% endfor %}
+</div>
+</div>
+{% endblock %}
